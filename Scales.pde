@@ -1,5 +1,6 @@
 void setup(){
   size(1200,600);
+  noLoop();
 }
 void draw(){
   for (int y = 0; y <=600; y+=300) {
@@ -21,3 +22,4 @@ void smiley(int x, int y){
   //left eye
   ellipse(x-40,y-10,30,60);
 }
+
