@@ -1,25 +1,72 @@
-void setup(){
-  size(1200,600);
-  noLoop();
+void setup() {
+  size(1000,1000,P3D);
 }
-void draw(){
-  for (int y = 0; y <=600; y+=300) {
-    for (int x = 0; x <=1200; x+=300) {
-      smiley(x, y);
+
+void draw() {
+  background(0,0,0);
+  translate(500,500);
+  rotateX(-(mouseY-500)*PI*1/1100);
+  rotateY((mouseX-500)*PI*1/1100);
+  //scale(0,0);
+  
+  boolean shift = false;
+  int s = 0;
+  for (int y = -750; y <= 750; y += 100) {
+    if (shift) {
+      s = 0;
+      shift = false;
+    } else {
+      s = 50;
+      shift = true;
     }
+    for (int x = -700; x <= 750; x += 100) {
+      scale(x+s,y);
+    }
+    
   }
 }
 
-void smiley(int x, int y){
-  //yellow head
-  fill(255,255,0);
-  ellipse(x,y,300,300);
-  //smile
-  arc(x,y,230,230,radians(30), radians(150));
-  // right eye
-  fill(0,0,0);
-  ellipse(x+40,y-10,30,60);
-  //left eye
-  ellipse(x-40,y-10,30,60);
+void scale(int x, int y) {
+  fill(0,100,200);
+  beginShape();
+  vertex(x,y+100,40);
+  vertex(x+50,y,40);
+  vertex(x,y,0);
+  vertex(x-50,y,40);
+  vertex(x,y+100,40);
+  vertex(x,y+100,40);
+  endShape();
+  beginShape();
+  vertex(x,y-100,40);
+  vertex(x+50,y,40);
+  vertex(x,y,0);
+  vertex(x-50,y,40);
+  vertex(x,y-100,40);
+  vertex(x,y-100,40);
+  endShape();
+  
+  
+  pushMatrix();
+  noStroke();
+  fill(250,250,150);
+  translate(x,y,10);
+  sphere(25);
+  translate(0,-25);
+  sphere(25);
+  translate(0,50);
+  sphere(25);
+  translate(-25,-25);
+  sphere(25);
+  translate(50,0);
+  sphere(25);
+  
+  fill(200,50,50);
+  translate(-25,0,10);
+  sphere(25);
+  
+  fill(0,100,255);
+  translate(0,0,20);
+  sphere(10);
+  popMatrix();
+  stroke(0,0,0);
 }
-
